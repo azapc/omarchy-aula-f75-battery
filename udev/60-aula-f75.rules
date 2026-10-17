@@ -1,12 +1,9 @@
-# AULA F75. The keyboard presents two entirely different USB identities and
-# both need access, because which one is live depends on how it is connected:
+# AULA F75 Compx 2.4G receiver (3554:fa09). The battery is read over its
+# vendor pipe. Wired mode enumerates as a different device (258a:010c) that
+# the helper never opens, so it is deliberately not granted access here.
 #
-#   3554:fa09  Compx 2.4G receiver  - wireless. Battery over the vendor pipe.
-#   258a:010c  "BY Tech Gaming Keyboard" - what the keyboard itself enumerates
-#              as over USB-C. Plugging the cable in takes the radio down, so
-#              this is the only device present in wired mode.
-#
-# Both hidraw nodes are root-only by default, so the helper cannot open them.
+# The receiver's hidraw nodes are root-only by default, so the helper cannot
+# open them.
 # uaccess hands an ACL to whoever is logged in at the active seat, which is
 # narrower than the MODE="0666" that older guides suggest - that would expose
 # the keyboard's raw input stream, keystrokes included, to every account on
@@ -16,4 +13,3 @@
 # /usr/lib/udev/rules.d/70-uaccess.rules is what turns the tag into an ACL, so
 # a file numbered above 70 sets the tag too late and silently does nothing.
 KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="3554", ATTRS{idProduct}=="fa09", TAG+="uaccess"
-KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="258a", ATTRS{idProduct}=="010c", TAG+="uaccess"

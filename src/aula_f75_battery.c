@@ -9,7 +9,7 @@
  * because they mean opposite things to the widget:
  *   0  battery emitted
  *   1  receiver present, no reply - keyboard asleep. Hold the last reading.
- *   2  write error
+ *   2  usage error, or stdout could not be written
  *   3  receiver absent - unplugged, or in wired mode under its other USB id.
  *      Drop the reading.
  *   4  receiver present but not openable - the udev rule is missing.

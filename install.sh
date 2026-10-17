@@ -25,5 +25,6 @@ udevadm trigger --subsystem-match=hidraw --action=add
 
 echo "Installed /etc/udev/rules.d/$rule"
 echo
-echo "Replug the receiver, then check its nodes show a '+' (an ACL):"
+echo "The widget appears within a few seconds. To confirm, check the"
+echo "receiver's nodes show a '+' (an ACL):"
 echo "  ls -l /dev/hidraw*"
